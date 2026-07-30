@@ -1,6 +1,35 @@
 (() => {
   'use strict';
 
+  // Keep the official ESG24 lockup readable in compact header/footer spaces.
+  const brandPolish = document.createElement('style');
+  brandPolish.dataset.esg24BrandPolish = 'true';
+  brandPolish.textContent = `
+    .site-header .brand{line-height:0;min-width:136px}
+    .site-header .brand img{display:block;width:136px!important;height:75px!important;max-width:none!important;object-fit:cover!important;object-position:top center!important}
+    .contact-brand img,.brand-full-logo{height:auto!important;object-fit:contain!important}
+    .contact-brand img{width:min(100%,270px)!important;filter:drop-shadow(0 14px 30px rgba(5,61,51,.12))}
+    .footer-main{align-items:start}
+    .footer-brand{max-width:310px}
+    .footer-brand img{display:block;width:164px!important;height:91px!important;max-width:none!important;object-fit:cover!important;object-position:top center!important;filter:brightness(0) invert(1)!important;opacity:.96!important;margin:0 0 18px}
+    .footer-brand p{margin:0;max-width:290px;color:rgba(255,255,255,.54);font-size:12px;line-height:1.75}
+    .footer-col strong{color:#fff;font-size:11px;margin-bottom:10px}
+    .footer-col a,.footer-col span{color:rgba(255,255,255,.6);font-size:12px;line-height:1.6}
+    .footer-bottom{padding-top:22px;color:rgba(255,255,255,.43)}
+    :focus-visible{outline:3px solid rgba(105,215,174,.72);outline-offset:3px}
+    @media(max-width:850px){
+      .site-header .brand{min-width:120px}
+      .site-header .brand img{width:120px!important;height:66px!important}
+    }
+    @media(max-width:600px){
+      .site-header .brand{min-width:106px}
+      .site-header .brand img{width:106px!important;height:59px!important}
+      .footer-brand img{width:150px!important;height:83px!important}
+      .site-footer{padding-top:58px}
+    }
+  `;
+  document.head.appendChild(brandPolish);
+
   const $ = (selector, scope = document) => scope?.querySelector(selector);
   const $$ = (selector, scope = document) => [...(scope?.querySelectorAll(selector) || [])];
 
@@ -10,6 +39,9 @@
   const dialog = $('#check-dialog');
   const form = $('#smart-form');
   const toast = $('.toast');
+
+  const aboutHeading = $('#ueber-uns .about-copy h2');
+  if (aboutHeading) aboutHeading.innerHTML = 'Persönliche Beratung beginnt mit <em>Zuhören.</em>';
 
   const setHeader = () => header?.classList.toggle('scrolled', window.scrollY > 18);
   setHeader();
@@ -147,6 +179,12 @@
     window.clearTimeout(showToast.timer);
     showToast.timer = window.setTimeout(() => { toast.hidden = true; }, 2600);
   }
+
+  const founderImg = $('.founder-image img');
+  founderImg?.addEventListener('error', () => {
+    const fallback = founderImg.dataset.fallback;
+    if (fallback && founderImg.src !== fallback) founderImg.src = fallback;
+  });
 
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
