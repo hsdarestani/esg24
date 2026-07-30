@@ -1,7 +1,8 @@
 (() => {
   'use strict';
 
-  // Keep the official ESG24 lockup readable in compact header/footer spaces.
+  // Keep the official ESG24 lockup readable and introduce more human,
+  // real-world photography without changing the established brand system.
   const brandPolish = document.createElement('style');
   brandPolish.dataset.esg24BrandPolish = 'true';
   brandPolish.textContent = `
@@ -17,16 +18,63 @@
     .footer-col a,.footer-col span{color:rgba(255,255,255,.6);font-size:12px;line-height:1.6}
     .footer-bottom{padding-top:22px;color:rgba(255,255,255,.43)}
     :focus-visible{outline:3px solid rgba(105,215,174,.72);outline-offset:3px}
+
+    .hero-brand,.brand-stage{position:relative}
+    .hero-real-photo{position:absolute;z-index:1;right:-2px;top:22px;width:min(76%,390px);aspect-ratio:4/3;border-radius:34px;overflow:hidden;border:1px solid rgba(255,255,255,.2);box-shadow:0 38px 90px rgba(0,20,16,.34);animation:esgPhotoFloat 7s ease-in-out infinite}
+    .hero-real-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(6,62,54,.08),rgba(6,62,54,.02) 42%,rgba(4,33,28,.35))}
+    .hero-real-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transform:scale(1.025);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+    .hero-brand:hover .hero-real-photo img{transform:scale(1.07)}
+    .brand-card{z-index:3!important;transform:translate(-44px,54px) rotate(-2deg)!important}
+    .hero-brand:hover .brand-card{transform:translate(-40px,47px) rotate(0deg)!important}
+    .float-card{z-index:5!important}
+
+    .testimonial-card{grid-template-columns:90px minmax(0,1fr) 230px 150px!important;gap:34px!important}
+    .testimonial-real-photo{position:relative;justify-self:end;width:100%;max-width:230px;align-self:end}
+    .testimonial-real-photo:before{content:"";position:absolute;width:112px;height:112px;right:-18px;bottom:-18px;border-radius:50%;background:rgba(105,215,174,.16);filter:blur(2px)}
+    .testimonial-real-photo img{position:relative;z-index:1;width:100%;aspect-ratio:1/1.08;object-fit:cover;object-position:center top;border-radius:28px;border:1px solid rgba(255,255,255,.14);box-shadow:0 26px 65px rgba(0,0,0,.32);display:block;transition:transform .5s ease,box-shadow .5s ease}
+    .testimonial-real-photo:hover img{transform:translateY(-7px);box-shadow:0 34px 80px rgba(0,0,0,.38)}
+
+    .founder-image{position:relative}
+    .founder-image:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 55%,rgba(5,49,41,.16));mix-blend-mode:multiply}
+    .founder-image img{transition:transform .8s cubic-bezier(.2,.75,.2,1)}
+    .founder-wrap:hover .founder-image img{transform:scale(1.035)}
+
+    @keyframes esgPhotoFloat{0%,100%{transform:translateY(0) rotate(.35deg)}50%{transform:translateY(-10px) rotate(-.35deg)}}
+
+    @media(max-width:1080px){
+      .hero-real-photo{right:10px;top:30px;width:min(72%,350px)}
+      .brand-card{transform:translate(-20px,56px) rotate(-2deg)!important}
+      .hero-brand:hover .brand-card{transform:translate(-18px,50px) rotate(0deg)!important}
+      .testimonial-card{grid-template-columns:70px minmax(0,1fr) 210px!important}
+      .testimonial-seal{grid-column:2;justify-self:start;margin-top:5px}
+    }
     @media(max-width:850px){
       .site-header .brand{min-width:120px}
       .site-header .brand img{width:120px!important;height:66px!important}
+      .hero-brand{min-height:500px!important}
+      .hero-real-photo{inset:24px 20px auto 20px;width:auto;aspect-ratio:4/3;border-radius:28px}
+      .brand-card{width:min(84%,360px)!important;transform:translate(0,104px) rotate(-1.5deg)!important}
+      .hero-brand:hover .brand-card{transform:translate(0,97px) rotate(0deg)!important}
+      .testimonial-card{grid-template-columns:1fr!important;gap:24px!important}
+      .testimonial-card .quote-mark{display:none}
+      .testimonial-real-photo{justify-self:start;max-width:280px}
+      .testimonial-seal{grid-column:auto;justify-self:start}
     }
     @media(max-width:600px){
       .site-header .brand{min-width:106px}
       .site-header .brand img{width:106px!important;height:59px!important}
       .footer-brand img{width:150px!important;height:83px!important}
       .site-footer{padding-top:58px}
+      .hero-brand{min-height:420px!important}
+      .brand-stage{min-height:400px!important}
+      .hero-real-photo{inset:8px 2px auto 2px;border-radius:23px}
+      .brand-card{width:min(90%,320px)!important;padding:24px 22px 18px!important;transform:translate(0,88px) rotate(-1deg)!important}
+      .hero-brand:hover .brand-card{transform:translate(0,83px) rotate(0deg)!important}
+      .brand-card-footer{margin-top:16px!important;padding-top:14px!important}
+      .brand-card-footer strong{font-size:16px!important}
+      .testimonial-real-photo{max-width:230px}
     }
+    @media(prefers-reduced-motion:reduce){.hero-real-photo{animation:none}.hero-real-photo img,.testimonial-real-photo img,.founder-image img{transition:none!important}}
   `;
   document.head.appendChild(brandPolish);
 
@@ -42,6 +90,24 @@
 
   const aboutHeading = $('#ueber-uns .about-copy h2');
   if (aboutHeading) aboutHeading.innerHTML = 'Persönliche Beratung beginnt mit <em>Zuhören.</em>';
+
+  const heroStage = $('.brand-stage');
+  if (heroStage && !$('.hero-real-photo', heroStage)) {
+    const photo = document.createElement('figure');
+    photo.className = 'hero-real-photo';
+    photo.setAttribute('aria-label', 'Giuseppe Perla, persönlicher Ansprechpartner bei ESG24');
+    photo.innerHTML = '<img src="https://www.esg24.com/wp-content/uploads/2020/07/PHOTO-2020-07-18-16-00-31.jpg" alt="Giuseppe Perla im persönlichen Beratungsgespräch" width="720" height="900" decoding="async">';
+    heroStage.prepend(photo);
+  }
+
+  const testimonialCard = $('.testimonial-card');
+  if (testimonialCard && !$('.testimonial-real-photo', testimonialCard)) {
+    const photo = document.createElement('figure');
+    photo.className = 'testimonial-real-photo';
+    photo.innerHTML = '<img src="https://www.esg24.com/wp-content/uploads/2021/10/testimonial-person-1%402x.png" alt="Kundin von ESG24" width="600" height="650" loading="lazy" decoding="async">';
+    const seal = $('.testimonial-seal', testimonialCard);
+    testimonialCard.insertBefore(photo, seal || null);
+  }
 
   const setHeader = () => header?.classList.toggle('scrolled', window.scrollY > 18);
   setHeader();
@@ -179,6 +245,10 @@
     window.clearTimeout(showToast.timer);
     showToast.timer = window.setTimeout(() => { toast.hidden = true; }, 2600);
   }
+
+  $$('img').forEach(image => image.addEventListener('error', () => {
+    if (image.closest('.hero-real-photo,.testimonial-real-photo')) image.closest('figure')?.remove();
+  }, { once: true }));
 
   const founderImg = $('.founder-image img');
   founderImg?.addEventListener('error', () => {
