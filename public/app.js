@@ -1,11 +1,9 @@
 (() => {
   'use strict';
 
-  // Keep the official ESG24 lockup readable and introduce more human,
-  // real-world photography without changing the established brand system.
-  const brandPolish = document.createElement('style');
-  brandPolish.dataset.esg24BrandPolish = 'true';
-  brandPolish.textContent = `
+  const polish = document.createElement('style');
+  polish.dataset.esg24FinalPolish = 'true';
+  polish.textContent = `
     .site-header .brand{line-height:0;min-width:136px}
     .site-header .brand img{display:block;width:136px!important;height:75px!important;max-width:none!important;object-fit:cover!important;object-position:top center!important}
     .contact-brand img,.brand-full-logo{height:auto!important;object-fit:contain!important}
@@ -19,64 +17,110 @@
     .footer-bottom{padding-top:22px;color:rgba(255,255,255,.43)}
     :focus-visible{outline:3px solid rgba(105,215,174,.72);outline-offset:3px}
 
+    /* Hero: photography leads; the brand card supports it instead of hiding it. */
     .hero-brand,.brand-stage{position:relative}
-    .hero-real-photo{position:absolute;z-index:1;right:-2px;top:22px;width:min(76%,390px);aspect-ratio:4/3;border-radius:34px;overflow:hidden;border:1px solid rgba(255,255,255,.2);box-shadow:0 38px 90px rgba(0,20,16,.34);animation:esgPhotoFloat 7s ease-in-out infinite}
-    .hero-real-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(6,62,54,.08),rgba(6,62,54,.02) 42%,rgba(4,33,28,.35))}
-    .hero-real-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transform:scale(1.025);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-    .hero-brand:hover .hero-real-photo img{transform:scale(1.07)}
-    .brand-card{z-index:3!important;transform:translate(-44px,54px) rotate(-2deg)!important}
-    .hero-brand:hover .brand-card{transform:translate(-40px,47px) rotate(0deg)!important}
-    .float-card{z-index:5!important}
+    .brand-stage{isolation:isolate}
+    .hero-real-photo{position:absolute;z-index:1;inset:4px 0 72px 34px;margin:0;border-radius:36px;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 38px 90px rgba(0,20,16,.34);background:#164c41}
+    .hero-real-photo:before{content:"";position:absolute;z-index:2;inset:0;background:linear-gradient(125deg,rgba(3,44,37,.04) 28%,rgba(3,44,37,.2) 72%,rgba(3,34,29,.54))}
+    .hero-real-photo:after{content:"Nachhaltig wohnen";position:absolute;z-index:3;right:18px;top:18px;padding:9px 13px;border:1px solid rgba(255,255,255,.3);border-radius:999px;background:rgba(5,65,55,.58);backdrop-filter:blur(10px);color:#fff;font-size:9px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+    .hero-real-photo img{width:100%;height:100%;object-fit:cover;object-position:center 52%;display:block;transform:scale(1.035);animation:esgKenBurns 14s ease-in-out infinite alternate;will-change:transform}
+    .brand-card{position:absolute!important;z-index:4!important;left:0!important;bottom:18px!important;width:292px!important;padding:23px 24px 17px!important;border-radius:25px!important;transform:rotate(-1.8deg)!important;background:rgba(250,253,250,.96)!important;backdrop-filter:blur(14px)!important;box-shadow:0 28px 70px rgba(0,22,17,.34)!important}
+    .hero-brand:hover .brand-card{transform:translateY(-5px) rotate(0deg)!important}
+    .brand-card .brand-full-logo{width:min(100%,205px)!important}
+    .brand-card-footer{margin-top:14px!important;padding-top:12px!important}
+    .brand-card-footer strong{font-size:15px!important}
+    .float-card{z-index:6!important;transition:transform .35s ease,box-shadow .35s ease!important}
+    .float-card:hover{transform:translateY(-6px)!important;box-shadow:0 25px 55px rgba(0,24,19,.34)!important}
+    .float-energy{left:9px!important;top:54px!important}
+    .float-property{right:-8px!important;bottom:82px!important}
 
-    .testimonial-card{grid-template-columns:90px minmax(0,1fr) 230px 150px!important;gap:34px!important}
-    .testimonial-real-photo{position:relative;justify-self:end;width:100%;max-width:230px;align-self:end}
-    .testimonial-real-photo:before{content:"";position:absolute;width:112px;height:112px;right:-18px;bottom:-18px;border-radius:50%;background:rgba(105,215,174,.16);filter:blur(2px)}
-    .testimonial-real-photo img{position:relative;z-index:1;width:100%;aspect-ratio:1/1.08;object-fit:cover;object-position:center top;border-radius:28px;border:1px solid rgba(255,255,255,.14);box-shadow:0 26px 65px rgba(0,0,0,.32);display:block;transition:transform .5s ease,box-shadow .5s ease}
-    .testimonial-real-photo:hover img{transform:translateY(-7px);box-shadow:0 34px 80px rgba(0,0,0,.38)}
+    /* Real-estate section: use a real property image instead of a generic illustration. */
+    .property-visual{min-height:360px;background:#d8e6dd}
+    .property-visual>.property-photo{width:100%;height:100%;min-height:360px;object-fit:cover;object-position:center;display:block;transform:scale(1.01);transition:transform .9s cubic-bezier(.2,.7,.2,1),filter .5s ease}
+    .property-panel:hover .property-photo{transform:scale(1.055);filter:saturate(1.06) contrast(1.02)}
+    .property-visual:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,84,72,.02) 45%,rgba(7,65,55,.42));z-index:1}
+    .property-tag{z-index:2!important;backdrop-filter:blur(9px)}
+    .property-panel{overflow:hidden;transition:transform .45s cubic-bezier(.2,.75,.2,1),box-shadow .45s ease}
+    .property-panel:hover{transform:translateY(-8px);box-shadow:0 36px 95px rgba(16,49,42,.2)}
 
-    .founder-image{position:relative}
-    .founder-image:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 55%,rgba(5,49,41,.16));mix-blend-mode:multiply}
-    .founder-image img{transition:transform .8s cubic-bezier(.2,.75,.2,1)}
-    .founder-wrap:hover .founder-image img{transform:scale(1.035)}
+    /* The quote does not use a random/person-unverified portrait. */
+    .testimonial-card{grid-template-columns:90px minmax(0,1fr) 170px!important;gap:46px!important}
+    .testimonial-real-photo{display:none!important}
+    .testimonial-seal{position:relative;overflow:visible;animation:esgPulse 4.5s ease-in-out infinite}
+    .testimonial-seal:before{content:"";position:absolute;inset:-18px;border:1px solid rgba(105,215,174,.15);border-radius:50%;animation:esgRing 4.5s ease-out infinite}
+    .testimonial blockquote{position:relative}
+    .testimonial blockquote:after{content:"";display:block;width:74px;height:2px;margin-top:24px;background:linear-gradient(90deg,var(--mint),transparent);transform-origin:left;animation:esgLine 3.4s ease-in-out infinite alternate}
 
-    @keyframes esgPhotoFloat{0%,100%{transform:translateY(0) rotate(.35deg)}50%{transform:translateY(-10px) rotate(-.35deg)}}
+    /* More motion and depth without making the site feel gimmicky. */
+    .benefit-card,.expertise-grid article,.property-action,.choice,.contact-links a{will-change:transform;transition:transform .36s cubic-bezier(.2,.75,.2,1),box-shadow .36s ease,border-color .3s ease,background .3s ease}
+    .benefit-card:hover{transform:translateY(-10px) rotate(.25deg)!important;box-shadow:0 28px 75px rgba(16,49,42,.16)!important}
+    .expertise-grid article:hover{transform:translateY(-5px);position:relative;z-index:2;box-shadow:0 22px 50px rgba(0,0,0,.2)}
+    .property-action:hover,.choice:hover{transform:translateY(-4px)}
+    .hero-services article{transition:background .3s ease,transform .3s ease}
+    .hero-services article:hover{background:rgba(105,215,174,.09);transform:translateY(-2px)}
+    .stats-grid>div{position:relative;overflow:hidden}
+    .stats-grid>div:after{content:"";position:absolute;inset:0 auto 0 -70%;width:45%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);transform:skewX(-18deg);animation:esgShine 7s ease-in-out infinite}
+    .stats-grid>div:nth-child(2):after{animation-delay:1.1s}.stats-grid>div:nth-child(3):after{animation-delay:2.2s}
+
+    .reveal{opacity:0;transform:translateY(32px);filter:blur(5px);transition:opacity .85s ease,transform .85s cubic-bezier(.18,.8,.22,1),filter .85s ease;transition-delay:var(--delay,0ms)}
+    .reveal.reveal-left{transform:translateX(-42px)}
+    .reveal.reveal-right{transform:translateX(42px)}
+    .reveal.reveal-scale{transform:scale(.955)}
+    .reveal.in-view{opacity:1;transform:none;filter:none}
+    .motion-stagger>*{opacity:0;transform:translateY(22px);transition:opacity .62s ease,transform .62s cubic-bezier(.2,.75,.2,1);transition-delay:calc(var(--item-index,0) * 70ms)}
+    .motion-stagger.in-view>*{opacity:1;transform:none}
+
+    @keyframes esgKenBurns{0%{transform:scale(1.035) translate3d(0,0,0)}100%{transform:scale(1.095) translate3d(-1.2%,.7%,0)}}
+    @keyframes esgPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+    @keyframes esgRing{0%{transform:scale(.84);opacity:0}35%{opacity:.7}100%{transform:scale(1.18);opacity:0}}
+    @keyframes esgLine{from{transform:scaleX(.55);opacity:.55}to{transform:scaleX(1);opacity:1}}
+    @keyframes esgShine{0%,52%{left:-70%}68%,100%{left:145%}}
 
     @media(max-width:1080px){
-      .hero-real-photo{right:10px;top:30px;width:min(72%,350px)}
-      .brand-card{transform:translate(-20px,56px) rotate(-2deg)!important}
-      .hero-brand:hover .brand-card{transform:translate(-18px,50px) rotate(0deg)!important}
-      .testimonial-card{grid-template-columns:70px minmax(0,1fr) 210px!important}
-      .testimonial-seal{grid-column:2;justify-self:start;margin-top:5px}
+      .hero-real-photo{inset:4px 10px 76px 10px}
+      .brand-card{left:18px!important;bottom:22px!important;width:270px!important}
+      .float-energy{left:-3px!important}.float-property{right:0!important}
+      .testimonial-card{grid-template-columns:70px minmax(0,1fr) 145px!important;gap:28px!important}
     }
     @media(max-width:850px){
       .site-header .brand{min-width:120px}
       .site-header .brand img{width:120px!important;height:66px!important}
-      .hero-brand{min-height:500px!important}
-      .hero-real-photo{inset:24px 20px auto 20px;width:auto;aspect-ratio:4/3;border-radius:28px}
-      .brand-card{width:min(84%,360px)!important;transform:translate(0,104px) rotate(-1.5deg)!important}
-      .hero-brand:hover .brand-card{transform:translate(0,97px) rotate(0deg)!important}
-      .testimonial-card{grid-template-columns:1fr!important;gap:24px!important}
+      .hero-brand{min-height:520px!important}
+      .brand-stage{min-height:500px!important}
+      .hero-real-photo{inset:0 8px 90px 8px;border-radius:29px}
+      .brand-card{left:50%!important;bottom:20px!important;width:min(82%,315px)!important;transform:translateX(-50%) rotate(-1deg)!important}
+      .hero-brand:hover .brand-card{transform:translateX(-50%) translateY(-4px) rotate(0)!important}
+      .float-energy{left:2px!important;top:35px!important}.float-property{right:2px!important;bottom:98px!important}
+      .testimonial-card{grid-template-columns:1fr 130px!important;gap:24px!important}
       .testimonial-card .quote-mark{display:none}
-      .testimonial-real-photo{justify-self:start;max-width:280px}
-      .testimonial-seal{grid-column:auto;justify-self:start}
+      .property-visual,.property-visual>.property-photo{min-height:320px}
     }
     @media(max-width:600px){
       .site-header .brand{min-width:106px}
       .site-header .brand img{width:106px!important;height:59px!important}
       .footer-brand img{width:150px!important;height:83px!important}
       .site-footer{padding-top:58px}
-      .hero-brand{min-height:420px!important}
-      .brand-stage{min-height:400px!important}
-      .hero-real-photo{inset:8px 2px auto 2px;border-radius:23px}
-      .brand-card{width:min(90%,320px)!important;padding:24px 22px 18px!important;transform:translate(0,88px) rotate(-1deg)!important}
-      .hero-brand:hover .brand-card{transform:translate(0,83px) rotate(0deg)!important}
-      .brand-card-footer{margin-top:16px!important;padding-top:14px!important}
-      .brand-card-footer strong{font-size:16px!important}
-      .testimonial-real-photo{max-width:230px}
+      .hero-brand{min-height:430px!important}
+      .brand-stage{min-height:420px!important}
+      .hero-real-photo{inset:0 0 88px;border-radius:23px}
+      .hero-real-photo:after{right:10px;top:10px;font-size:7px;padding:7px 9px}
+      .brand-card{bottom:16px!important;width:min(88%,292px)!important;padding:19px 20px 14px!important}
+      .brand-card .brand-full-logo{width:170px!important}
+      .float-card{font-size:8px!important;padding:8px 10px!important}
+      .float-card>span{width:27px!important;height:27px!important}
+      .float-energy{top:24px!important}.float-property{bottom:96px!important}
+      .testimonial-card{grid-template-columns:1fr!important}.testimonial-seal{justify-self:start;width:118px!important;height:118px!important}
+      .reveal.reveal-left,.reveal.reveal-right{transform:translateY(28px)}
+      .hero-orb,.hero-lines{max-width:100vw}
+      .experience-badge{right:0!important}
+      .property-visual,.property-visual>.property-photo{min-height:260px}
     }
-    @media(prefers-reduced-motion:reduce){.hero-real-photo{animation:none}.hero-real-photo img,.testimonial-real-photo img,.founder-image img{transition:none!important}}
+    @media(prefers-reduced-motion:reduce){
+      .hero-real-photo img,.testimonial-seal,.testimonial-seal:before,.testimonial blockquote:after,.stats-grid>div:after{animation:none!important}
+      .reveal,.motion-stagger>*{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+    }
   `;
-  document.head.appendChild(brandPolish);
+  document.head.appendChild(polish);
 
   const $ = (selector, scope = document) => scope?.querySelector(selector);
   const $$ = (selector, scope = document) => [...(scope?.querySelectorAll(selector) || [])];
@@ -87,26 +131,41 @@
   const dialog = $('#check-dialog');
   const form = $('#smart-form');
   const toast = $('.toast');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const aboutHeading = $('#ueber-uns .about-copy h2');
   if (aboutHeading) aboutHeading.innerHTML = 'Persönliche Beratung beginnt mit <em>Zuhören.</em>';
 
+  const HERO_PHOTO = 'https://images.unsplash.com/photo-1775686332316-8e1ce04d10d7?auto=format&fit=crop&fm=jpg&q=82&w=1800';
+  const PROPERTY_PHOTO = 'https://images.unsplash.com/photo-1773754532196-014342510e64?auto=format&fit=crop&fm=jpg&q=82&w=1800';
+
+  // Remove the previous narrow testimonial portrait: it was not compositionally useful
+  // and the public source does not establish that it depicts the quoted customer.
+  $('.testimonial-real-photo')?.remove();
+
   const heroStage = $('.brand-stage');
-  if (heroStage && !$('.hero-real-photo', heroStage)) {
+  if (heroStage) {
+    $('.hero-real-photo', heroStage)?.remove();
     const photo = document.createElement('figure');
     photo.className = 'hero-real-photo';
-    photo.setAttribute('aria-label', 'Giuseppe Perla, persönlicher Ansprechpartner bei ESG24');
-    photo.innerHTML = '<img src="https://www.esg24.com/wp-content/uploads/2020/07/PHOTO-2020-07-18-16-00-31.jpg" alt="Giuseppe Perla im persönlichen Beratungsgespräch" width="720" height="900" decoding="async">';
+    photo.innerHTML = `<img src="${HERO_PHOTO}" alt="Modernes energieeffizientes Wohnhaus mit Solaranlage" width="1800" height="1200" decoding="async" fetchpriority="high">`;
     heroStage.prepend(photo);
   }
 
-  const testimonialCard = $('.testimonial-card');
-  if (testimonialCard && !$('.testimonial-real-photo', testimonialCard)) {
-    const photo = document.createElement('figure');
-    photo.className = 'testimonial-real-photo';
-    photo.innerHTML = '<img src="https://www.esg24.com/wp-content/uploads/2021/10/testimonial-person-1%402x.png" alt="Kundin von ESG24" width="600" height="650" loading="lazy" decoding="async">';
-    const seal = $('.testimonial-seal', testimonialCard);
-    testimonialCard.insertBefore(photo, seal || null);
+  const propertyVisual = $('.property-visual');
+  if (propertyVisual) {
+    const svg = $('svg', propertyVisual);
+    if (svg) {
+      const image = document.createElement('img');
+      image.className = 'property-photo';
+      image.src = PROPERTY_PHOTO;
+      image.alt = 'Hochwertig präsentierter Wohnraum für den Immobilienverkauf';
+      image.width = 1800;
+      image.height = 1200;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      svg.replaceWith(image);
+    }
   }
 
   const setHeader = () => header?.classList.toggle('scrolled', window.scrollY > 18);
@@ -124,6 +183,22 @@
     menuToggle?.setAttribute('aria-expanded', 'false');
   }));
 
+  // Give each major block a distinct entrance direction and stagger dense grids.
+  const revealItems = $$('.reveal');
+  revealItems.forEach((el, index) => {
+    if (el.closest('.hero')) el.classList.add(index % 2 ? 'reveal-right' : 'reveal-left');
+    else if (el.matches('.property-panel,.founder-wrap,.smart-form')) el.classList.add('reveal-right');
+    else if (el.matches('.property-copy,.about-copy,.quickcheck-copy')) el.classList.add('reveal-left');
+    else if (index % 4 === 0) el.classList.add('reveal-scale');
+  });
+
+  ['.benefit-grid', '.expertise-grid', '.hero-services', '.stats-grid', '.property-actions'].forEach(selector => {
+    const grid = $(selector);
+    if (!grid) return;
+    grid.classList.add('motion-stagger');
+    [...grid.children].forEach((child, index) => child.style.setProperty('--item-index', index));
+  });
+
   const revealObserver = 'IntersectionObserver' in window
     ? new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -134,11 +209,58 @@
       }, { threshold: 0.1, rootMargin: '0px 0px -35px' })
     : null;
 
-  $$('.reveal').forEach(el => {
+  [...revealItems, ...$$('.motion-stagger')].forEach(el => {
     el.style.setProperty('--delay', `${el.dataset.delay || 0}ms`);
     if (revealObserver) revealObserver.observe(el);
     else el.classList.add('in-view');
   });
+
+  // Count the proof points once they become visible.
+  const animateNumber = element => {
+    const original = element.textContent.trim();
+    const numeric = Number(original.replace(/[^0-9]/g, ''));
+    if (!numeric || reduceMotion) return;
+    const suffix = original.includes('%') ? '%' : original.includes('+') ? '+' : '';
+    const usesThousands = original.includes('.') && numeric >= 1000;
+    const start = performance.now();
+    const duration = 1300;
+    const frame = now => {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(numeric * eased);
+      element.textContent = `${usesThousands ? current.toLocaleString('de-DE') : current}${suffix}`;
+      if (progress < 1) requestAnimationFrame(frame);
+      else element.textContent = original;
+    };
+    requestAnimationFrame(frame);
+  };
+
+  const stats = $$('.stats-grid strong');
+  if ('IntersectionObserver' in window && stats.length) {
+    const statsObserver = new IntersectionObserver((entries, observer) => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      stats.forEach(animateNumber);
+      observer.disconnect();
+    }, { threshold: 0.45 });
+    statsObserver.observe($('.stats-grid'));
+  }
+
+  // Subtle pointer parallax for the two visual anchors.
+  if (!reduceMotion && window.matchMedia('(pointer:fine)').matches) {
+    $$('.hero-real-photo,.property-panel').forEach(card => {
+      card.addEventListener('pointermove', event => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.setProperty('--mx', x.toFixed(3));
+        card.style.setProperty('--my', y.toFixed(3));
+        if (card.classList.contains('property-panel')) card.style.transform = `perspective(900px) rotateY(${x * 2.4}deg) rotateX(${-y * 2.4}deg) translateY(-5px)`;
+      });
+      card.addEventListener('pointerleave', () => {
+        if (card.classList.contains('property-panel')) card.style.transform = '';
+      });
+    });
+  }
 
   const radioForIntent = intent =>
     $$('input[name="intent"]', form).find(input => input.value === intent);
@@ -247,7 +369,8 @@
   }
 
   $$('img').forEach(image => image.addEventListener('error', () => {
-    if (image.closest('.hero-real-photo,.testimonial-real-photo')) image.closest('figure')?.remove();
+    if (image.closest('.hero-real-photo')) image.closest('figure')?.remove();
+    if (image.classList.contains('property-photo')) image.remove();
   }, { once: true }));
 
   const founderImg = $('.founder-image img');
