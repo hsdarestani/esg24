@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const $ = (selector, scope = document) => scope.querySelector(selector);
-  const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+  const $ = (selector, scope = document) => scope?.querySelector(selector);
+  const $$ = (selector, scope = document) => [...(scope?.querySelectorAll(selector) || [])];
 
   const header = $('.site-header');
   const menuToggle = $('.menu-toggle');
@@ -11,7 +11,7 @@
   const form = $('#smart-form');
   const toast = $('.toast');
 
-  const setHeader = () => header?.classList.toggle('scrolled', window.scrollY > 24);
+  const setHeader = () => header?.classList.toggle('scrolled', window.scrollY > 18);
   setHeader();
   window.addEventListener('scroll', setHeader, { passive: true });
 
@@ -26,35 +26,24 @@
     menuToggle?.setAttribute('aria-expanded', 'false');
   }));
 
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('in-view');
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+  const revealObserver = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -35px' })
+    : null;
 
   $$('.reveal').forEach(el => {
     el.style.setProperty('--delay', `${el.dataset.delay || 0}ms`);
-    revealObserver.observe(el);
+    if (revealObserver) revealObserver.observe(el);
+    else el.classList.add('in-view');
   });
 
-  const switchTabs = $$('.switch-tab');
-  switchTabs.forEach(tab => tab.addEventListener('click', () => {
-    const target = tab.dataset.panel;
-    switchTabs.forEach(item => {
-      const active = item === tab;
-      item.classList.toggle('active', active);
-      item.setAttribute('aria-selected', String(active));
-    });
-    $$('[data-panel-content]').forEach(panel => {
-      const active = panel.dataset.panelContent === target;
-      panel.classList.toggle('active', active);
-      panel.hidden = !active;
-    });
-  }));
-
-  const radioForIntent = intent => $$('input[name="intent"]', form).find(input => input.value === intent);
+  const radioForIntent = intent =>
+    $$('input[name="intent"]', form).find(input => input.value === intent);
 
   const selectIntent = intent => {
     const radio = radioForIntent(intent);
@@ -72,7 +61,9 @@
     document.body.classList.add('dialog-open');
   };
 
-  $$('.js-open-check').forEach(button => button.addEventListener('click', () => openCheck(button.dataset.intent)));
+  $$('.js-open-check').forEach(button => {
+    button.addEventListener('click', () => openCheck(button.dataset.intent));
+  });
 
   $('.dialog-close')?.addEventListener('click', () => dialog.close());
   dialog?.addEventListener('click', event => {
@@ -80,12 +71,13 @@
   });
   dialog?.addEventListener('close', () => document.body.classList.remove('dialog-open'));
 
-  $$('[data-dialog-intent]').forEach(button => button.addEventListener('click', () => {
-    const intent = button.dataset.dialogIntent;
-    selectIntent(intent);
-    dialog.close();
-    $('#check')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }));
+  $$('[data-dialog-intent]').forEach(button => {
+    button.addEventListener('click', () => {
+      selectIntent(button.dataset.dialogIntent);
+      dialog.close();
+      $('#check')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
 
   let step = 1;
   const updateStep = next => {
@@ -95,17 +87,17 @@
       panel.hidden = !active;
       panel.classList.toggle('active', active);
     });
-    const progress = $('.form-progress span', form);
-    progress?.style.setProperty('--progress', `${(step / 3) * 100}%`);
+    $('.form-progress span', form)?.style.setProperty('--progress', `${(step / 3) * 100}%`);
   };
 
-  $$('.next-step', form).forEach(button => button.addEventListener('click', () => updateStep(step + 1)));
-  $$('.back-step', form).forEach(button => button.addEventListener('click', () => updateStep(step - 1)));
+  $$('.next-step', form).forEach(button =>
+    button.addEventListener('click', () => updateStep(step + 1))
+  );
+  $$('.back-step', form).forEach(button =>
+    button.addEventListener('click', () => updateStep(step - 1))
+  );
 
-  const getFormData = () => {
-    const data = new FormData(form);
-    return Object.fromEntries(data.entries());
-  };
+  const getFormData = () => Object.fromEntries(new FormData(form).entries());
 
   const buildMessage = () => {
     const data = getFormData();
@@ -126,9 +118,9 @@
     const name = $('[name="name"]', form);
     const contact = $('[name="contact"]', form);
     const consent = $('[name="consent"]', form);
-    if (!name.value.trim()) return name.reportValidity();
-    if (!contact.value.trim()) return contact.reportValidity();
-    if (!consent.checked) return consent.reportValidity();
+    if (!name?.value.trim()) return name?.reportValidity();
+    if (!contact?.value.trim()) return contact?.reportValidity();
+    if (!consent?.checked) return consent?.reportValidity();
     return true;
   };
 
@@ -144,8 +136,8 @@
     if (!validateFinal()) return;
     const data = getFormData();
     const subject = `ESG24 Anfrage: ${data.intent || 'Beratung'}`;
-    const url = `mailto:info@esg24.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildMessage())}`;
-    window.location.href = url;
+    window.location.href =
+      `mailto:info@esg24.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildMessage())}`;
   });
 
   function showToast(message) {
@@ -156,8 +148,6 @@
     showToast.timer = window.setTimeout(() => { toast.hidden = true; }, 2600);
   }
 
-  const founderImg = $('.founder-image img');
-  founderImg?.addEventListener('error', () => { founderImg.style.display = 'none'; });
-
-  $('#year').textContent = new Date().getFullYear();
+  const year = $('#year');
+  if (year) year.textContent = new Date().getFullYear();
 })();
