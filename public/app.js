@@ -66,9 +66,24 @@
     : null;
   counters.forEach(el => countObserver ? countObserver.observe(el) : null);
 
+  const categoryForIntent = intent => {
+    if (/Strom/i.test(intent)) return 'Strom';
+    if (/Gas/i.test(intent)) return 'Gas';
+    if (/Gewerbe|Lieferstellen/i.test(intent)) return 'Gewerbekunde / mehrere Lieferstellen';
+    if (/Kapitalanlage/i.test(intent)) return 'Kapitalanlage';
+    if (/Immobilienverkauf|Gewerbeimmobilie|Off-Market/i.test(intent)) return 'Immobilienverkauf';
+    if (/Immobiliensuche/i.test(intent)) return 'Immobiliensuche';
+    if (/Energieausweis/i.test(intent)) return 'Energieausweis';
+    if (/Photovoltaik/i.test(intent)) return 'Photovoltaik';
+    return 'Allgemeine Beratung';
+  };
+
   const selectIntent = intent => {
-    const radio = $$('input[name="intent"]', form).find(input => input.value === intent);
+    const category = categoryForIntent(intent);
+    const radio = $$('input[name="intent"]', form).find(input => input.value === category);
     if (radio) radio.checked = true;
+    const detail = $('[name="selectedDetail"]', form);
+    if (detail) detail.value = intent;
     $('#kontakt')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     window.setTimeout(() => $('[name="name"]', form)?.focus({ preventScroll: true }), reduceMotion ? 0 : 500);
   };
@@ -80,10 +95,11 @@
   const formData = () => Object.fromEntries(new FormData(form).entries());
   const message = () => {
     const data = formData();
+    const topic = data.selectedDetail || data.intent || '-';
     return [
       'Hallo ESG24, ich möchte mich unverbindlich beraten lassen.',
       '',
-      `Thema: ${data.intent || '-'}`,
+      `Thema: ${topic}`,
       `Bevorzugter Kontakt: ${data.preferredContact || '-'}`,
       `PLZ: ${data.postalCode || '-'}`,
       `Nachricht: ${data.details || '-'}`,
@@ -114,7 +130,7 @@
   $('[data-send-email]', form)?.addEventListener('click', () => {
     if (!validate()) return;
     const data = formData();
-    const subject = `ESG24 Anfrage: ${data.intent || 'Beratung'}`;
+    const subject = `ESG24 Anfrage: ${data.selectedDetail || data.intent || 'Beratung'}`;
     window.location.href = `mailto:info@esg24.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message())}`;
   });
 
