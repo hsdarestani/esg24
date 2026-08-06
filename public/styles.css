@@ -1,28 +1,28 @@
 @import url("./styles-base.css");
 
 /* Logo presentation refinements */
-html{scroll-padding-top:108px}
-.header-inner{height:100px;gap:24px}
-.brand{min-width:170px;height:92px}
-.brand img{width:170px;height:94px}
-.hero{padding-top:170px}
+html{scroll-padding-top:120px}
+.header-inner{height:112px;gap:20px}
+.brand{min-width:205px;height:104px}
+.brand img{width:205px;height:108px}
+.hero{padding-top:184px}
 
 .footer-brand{max-width:330px}
 .footer-brand img{width:230px;height:auto;max-width:100%;object-fit:contain;object-position:center;filter:none;opacity:1;margin:0 0 18px;padding:12px 15px 14px;border:1px solid rgba(105,215,174,.28);border-radius:20px;background:linear-gradient(145deg,#fff,#eef8f3);box-shadow:0 20px 50px rgba(0,0,0,.22)}
 
 @media(max-width:850px){
-  html{scroll-padding-top:92px}
-  .header-inner{height:84px}
-  .brand{min-width:135px;height:74px}
-  .brand img{width:135px;height:75px}
-  .hero{padding-top:138px}
+  html{scroll-padding-top:100px}
+  .header-inner{height:92px}
+  .brand{min-width:155px;height:82px}
+  .brand img{width:155px;height:84px}
+  .hero{padding-top:148px}
 }
 
 @media(max-width:600px){
-  html{scroll-padding-top:82px}
-  .header-inner{height:76px}
-  .brand{min-width:120px;height:66px}
-  .brand img{width:120px;height:66px}
-  .hero{padding-top:118px}
+  html{scroll-padding-top:88px}
+  .header-inner{height:82px}
+  .brand{min-width:140px;height:74px}
+  .brand img{width:140px;height:76px}
+  .hero{padding-top:128px}
   .footer-brand img{width:210px}
 }
