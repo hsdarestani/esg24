@@ -67,18 +67,23 @@
   counters.forEach(el => countObserver ? countObserver.observe(el) : null);
 
   const categoryForIntent = intent => {
+    const values = $$('input[name="intent"]', form).map(input => input.value);
+    if (values.includes(intent)) return intent;
     if (/Strom/i.test(intent)) return 'Strom';
     if (/Gas/i.test(intent)) return 'Gas';
-    if (/Gewerbe|Lieferstellen/i.test(intent)) return 'Gewerbekunde / mehrere Lieferstellen';
+    if (/Gewerbe.*Lieferstellen|Energieoptimierung/i.test(intent)) return /Gewerbe/i.test(intent) ? 'Gewerbe / mehrere Lieferstellen' : 'Strom';
     if (/Kapitalanlage/i.test(intent)) return 'Kapitalanlage';
-    if (/Immobilienverkauf|Gewerbeimmobilie|Off-Market/i.test(intent)) return 'Immobilienverkauf';
+    if (/Gewerbeimmobil/i.test(intent)) return 'Gewerbeimmobilie';
+    if (/Off-Market|Immobilienverkauf|Immobilienberatung/i.test(intent)) return 'Immobilienverkauf';
     if (/Immobiliensuche/i.test(intent)) return 'Immobiliensuche';
     if (/Energieausweis/i.test(intent)) return 'Energieausweis';
-    if (/Photovoltaik/i.test(intent)) return 'Photovoltaik';
+    if (/Photovoltaik|Solaranlage/i.test(intent)) return 'Photovoltaik / Solaranlage';
+    if (/Energetische Modernisierung/i.test(intent)) return 'Energetische Modernisierung';
     return 'Allgemeine Beratung';
   };
 
   const selectIntent = intent => {
+    if (!form) return;
     const category = categoryForIntent(intent);
     const radio = $$('input[name="intent"]', form).find(input => input.value === category);
     if (radio) radio.checked = true;
@@ -91,29 +96,6 @@
   $$('.js-select-intent').forEach(button => {
     button.addEventListener('click', () => selectIntent(button.dataset.intent || 'Allgemeine Beratung'));
   });
-
-  const mountImmoweltPartner = () => {
-    const propertySection = $('#immobilien');
-    if (!propertySection || $('.immowelt-partner-section')) return;
-
-    const section = document.createElement('section');
-    section.className = 'immowelt-partner-section section-light';
-    section.setAttribute('aria-label', 'Immowelt Partnerschaft');
-    section.innerHTML = `
-      <div class="container immowelt-partner-inner">
-        <div class="immowelt-partner-copy">
-          <div class="eyebrow dark"><span></span> Immowelt Partner</div>
-          <h2>ESG24 bei <em>immowelt.</em></h2>
-          <p>ESG24 ist als Partner bei immowelt vertreten. Über das offizielle Partner-Logo gelangen Sie direkt zum ESG24-Profil bei immowelt.</p>
-        </div>
-        <div class="immowelt-partner-badge">
-          <a href="https://immowelt.de/profil/16637856" title="Partnerschaft mit AVIV Germany GmbH" target="_blank"><img src="https://immowelt.de/app_themes/global_rwd/image/logo/partner-awards/partneraward_partner.svg" alt="Immowelt-Partner ESG24" width="175" height="175"/></a>
-        </div>
-      </div>`;
-
-    propertySection.insertAdjacentElement('afterend', section);
-  };
-  mountImmoweltPartner();
 
   const formData = () => Object.fromEntries(new FormData(form).entries());
   const message = () => {
@@ -163,7 +145,7 @@
       document.body.classList.add('dialog-open');
     }
   }));
-  $('.cookie-close')?.addEventListener('click', () => cookieDialog.close());
+  $('.cookie-close')?.addEventListener('click', () => cookieDialog?.close());
   $('.cookie-save')?.addEventListener('click', () => {
     localStorage.setItem('esg24-cookie-settings', 'essential-only');
     cookieDialog?.close();
