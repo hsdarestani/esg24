@@ -74,6 +74,98 @@ h1,h2,h3,h4,h5,h6,p,span,strong,small,a,button,label,li,blockquote,.eyebrow,.her
   font-size:min(1em,16px);
 }
 
+/* Global readability pass: the previous UI used many 8–10 px labels. Keep the hierarchy,
+   but make supporting copy, badges and controls comfortably readable on desktop and mobile. */
+body{font-size:16px!important}
+.desktop-nav a{font-size:13px!important}
+.header-phone{font-size:12.5px!important}
+.btn-small{font-size:12.5px!important}
+.btn-large{font-size:13.5px!important}
+.eyebrow{font-size:10.5px!important;line-height:1.45!important}
+.hero-text{font-size:16px!important}
+.hero-proof{font-size:12px!important;line-height:1.45!important}
+.hero-bottom span{font-size:10px!important}
+.hero-bottom strong{font-size:16px!important;line-height:1.35!important}
+.person-kicker{font-size:9.5px!important}
+.person-card small{font-size:11px!important}
+.person-card-actions a{font-size:10.5px!important}
+.floating-note small{font-size:9px!important}
+
+.intro-copy p,.section-heading p,.business-copy>p,.property-copy>p,.method-copy>p,.about-copy>p,.contact-copy>p{font-size:16px!important}
+.text-link,.text-link-button{font-size:12.5px!important}
+.trust-grid span{font-size:10px!important;line-height:1.4!important}
+.trust-grid strong{font-size:30px!important}
+
+.service-top{font-size:11px!important}
+.service-large p{font-size:14.5px!important}
+.service-large li{font-size:12.5px!important;line-height:1.55!important}
+.service-cta{font-size:12px!important}
+.service-mini-grid strong{font-size:19px!important}
+.service-mini-grid p{font-size:12.5px!important;line-height:1.55!important}
+.energy-overview article span{font-size:12px!important}
+.energy-overview article strong{font-size:15.5px!important}
+.energy-note{font-size:14px!important;line-height:1.5!important}
+
+.business-points span{font-size:13px!important;line-height:1.45!important}
+.business-points i{font-size:9px!important}
+.dashboard-head span{font-size:19px!important}
+.dashboard-head b{font-size:9.5px!important}
+.dashboard-summary span{font-size:9.5px!important}
+.dashboard-summary strong{font-size:13.5px!important}
+.dashboard-list strong{font-size:12.5px!important}
+.dashboard-list small{font-size:10.5px!important;line-height:1.4!important}
+.dashboard-list>div>b{font-size:9.5px!important}
+
+.property-intro{font-size:17px!important}
+.property-detail-card>strong{font-size:15.5px!important}
+.property-detail-card p{font-size:14px!important}
+.property-detail-card li{font-size:13px!important}
+.property-secondary-grid article>span{font-size:11.5px!important}
+.property-secondary-grid p{font-size:14px!important}
+.property-services strong{font-size:17px!important}
+.property-services small{font-size:10.5px!important;line-height:1.4!important}
+.property-photo-overlay span{font-size:9.5px!important}
+
+.bridge-grid article span{font-size:10px!important}
+.bridge-grid p{font-size:13.5px!important}
+.modern-grid p{font-size:12.5px!important;line-height:1.55!important}
+.modern-grid button{font-size:11.5px!important}
+.method-cards span{font-size:10px!important}
+.method-cards p{font-size:12.5px!important;line-height:1.55!important}
+.process-grid span{font-size:10px!important}
+.process-grid p{font-size:12.5px!important;line-height:1.55!important}
+
+.testimonial-label small{font-size:10px!important}
+.testimonial-copy strong{font-size:13px!important}
+.testimonial-copy span{font-size:10.5px!important}
+.testimonial-note strong{font-size:19px!important}
+.testimonial-note span{font-size:11.5px!important;line-height:1.5!important}
+.about-signals span{font-size:11.5px!important;padding:10px 14px!important}
+.about-caption span{font-size:10.5px!important}
+.about-experience span{font-size:9px!important}
+
+.direct-contact span{font-size:9.5px!important}
+.direct-contact strong{font-size:12px!important;line-height:1.45!important}
+.form-head span{font-size:9.5px!important}
+.form-head strong{font-size:21px!important}
+.topic-grid span{font-size:10.5px!important;line-height:1.35!important}
+.topic-group-title{font-size:11.5px!important}
+.field-grid label>span{font-size:10px!important}
+.consent span{font-size:10px!important;line-height:1.45!important}
+.email-submit{font-size:10.5px!important}
+
+.footer-brand p{font-size:12.5px!important}
+.footer-col strong{font-size:11.5px!important}
+.footer-col a,.footer-col span,.footer-col button{font-size:11.5px!important;line-height:1.45!important}
+.footer-bottom{font-size:10px!important;line-height:1.45!important}
+.whatsapp-float{font-size:11px!important}
+.mobile-cta a{font-size:10px!important}
+.cookie-kicker{font-size:9.5px!important}
+.cookie-shell p{font-size:12.5px!important}
+.cookie-shell strong{font-size:12px!important}
+.cookie-shell small{font-size:10px!important}
+.toast{font-size:11.5px!important}
+
 @media(max-width:1100px){
   .hero h1{font-size:clamp(42px,6vw,56px)!important}
   .hero-immowelt-badge{left:calc(50% - 220px);top:18px}
@@ -110,6 +202,7 @@ h1,h2,h3,h4,h5,h6,p,span,strong,small,a,button,label,li,blockquote,.eyebrow,.her
     object-fit:contain!important;
     object-position:center!important;
   }
+  body{font-size:15.5px!important}
   .hero h1{font-size:clamp(30px,8vw,34px)!important;line-height:1.05!important;letter-spacing:-.03em!important}
   h2{font-size:clamp(29px,7.7vw,34px)!important;line-height:1.06!important}
   h3{line-height:1.18!important}
@@ -123,10 +216,23 @@ h1,h2,h3,h4,h5,h6,p,span,strong,small,a,button,label,li,blockquote,.eyebrow,.her
     border-radius:17px;
   }
   .hero-immowelt-badge img{width:74px!important;height:74px!important}
+  .hero-text{font-size:14px!important}
+  .hero-proof{font-size:11px!important}
+  .hero-bottom span{font-size:9px!important}
+  .hero-bottom strong{font-size:14px!important}
+  .btn-large{font-size:12px!important}
+  .eyebrow{font-size:9.5px!important}
   .property-detail-card h3{font-size:1.28rem!important}
   .property-secondary-grid h3{font-size:1.15rem!important}
   .modern-grid h3{font-size:1.16rem!important}
-  .topic-grid span{font-size:9px!important}
+  .topic-grid span{font-size:10px!important}
+  .business-points span{font-size:12px!important}
+  .dashboard-list strong{font-size:12px!important}
+  .dashboard-list small{font-size:10px!important}
+  .about-signals span{font-size:10.5px!important}
+  .direct-contact strong{font-size:11.5px!important}
+  .footer-col a,.footer-col span,.footer-col button{font-size:11px!important}
+  .mobile-cta a{font-size:9.5px!important}
 }
 
 @media(max-width:380px){
@@ -143,5 +249,5 @@ h1,h2,h3,h4,h5,h6,p,span,strong,small,a,button,label,li,blockquote,.eyebrow,.her
   h2{font-size:28px!important}
   .hero-immowelt-badge{width:80px;height:80px;top:8px;left:8px}
   .hero-immowelt-badge img{width:68px!important;height:68px!important}
-  .btn-large{font-size:10.5px!important}
+  .btn-large{font-size:11px!important}
 }
