@@ -123,6 +123,32 @@
   };
   mountHeroImmoweltBadge();
 
+  const updateAboutCopy = () => {
+    const aboutCopy = $('.about-copy');
+    if (!aboutCopy) return;
+
+    const heading = $('h2', aboutCopy);
+    if (heading) heading.innerHTML = 'Persönliche Beratung beginnt mit <em>Zuhören.</em>';
+
+    const existingParagraphs = $$(':scope > p', aboutCopy);
+    existingParagraphs.forEach(paragraph => paragraph.remove());
+
+    const signals = $('.about-signals', aboutCopy);
+    const paragraphs = [
+      'Mein Name ist Giuseppe Perla und ich bin Gründer und persönlicher Ansprechpartner von ESG24. Seit über zwölf Jahren begleite ich Privatkunden, Gewerbekunden und Unternehmen in den Bereichen Energieoptimierung und Immobilien.',
+      'Was mir dabei besonders wichtig ist: Ich möchte verstehen, was mein Kunde wirklich braucht. Denn keine Situation ist gleich – weder bei einem Energievertrag noch beim Verkauf, Kauf oder der Suche nach einer Immobilie.',
+      'Bei ESG24 bekommen Sie deshalb keine Beratung von der Stange. Ich nehme mir Zeit für Ihr Anliegen, bespreche die Möglichkeiten verständlich mit Ihnen und begleite Sie persönlich bei den nächsten Schritten.',
+      'Ich weiß aus eigener Erfahrung, wie viel Verantwortung und Arbeit hinter einem Unternehmen steckt. Deshalb nehme ich die Anliegen meiner Kunden ernst, höre genau zu und kümmere mich darum mit der gleichen Sorgfalt, als wäre es mein eigenes Unternehmen.'
+    ];
+
+    paragraphs.forEach(text => {
+      const paragraph = document.createElement('p');
+      paragraph.textContent = text;
+      aboutCopy.insertBefore(paragraph, signals || null);
+    });
+  };
+  updateAboutCopy();
+
   const formData = () => Object.fromEntries(new FormData(form).entries());
   const message = () => {
     const data = formData();
