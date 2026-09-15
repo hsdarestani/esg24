@@ -19,6 +19,26 @@ h1,h2,h3,h4,h5,h6,p,span,strong,small,a,button,label,li,blockquote,.eyebrow,.her
   max-width:100%;
 }
 
+/* Header logo: always show the complete source artwork, including the lower marks. */
+.brand{
+  min-width:205px!important;
+  width:205px!important;
+  height:auto!important;
+  overflow:visible!important;
+  display:flex!important;
+  align-items:center!important;
+  flex:0 0 205px!important;
+}
+.brand img{
+  display:block!important;
+  width:205px!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:100px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+
 /* Official immowelt partner mark as a compact badge on the hero portrait. */
 .hero-immowelt-badge{
   position:absolute;
@@ -60,6 +80,15 @@ h1,h2,h3,h4,h5,h6,p,span,strong,small,a,button,label,li,blockquote,.eyebrow,.her
 }
 
 @media(max-width:850px){
+  .brand{
+    min-width:145px!important;
+    width:145px!important;
+    flex-basis:145px!important;
+  }
+  .brand img{
+    width:145px!important;
+    max-height:78px!important;
+  }
   .hero h1{font-size:clamp(36px,7.8vw,48px)!important}
   .hero-immowelt-badge{left:calc(50% - 205px);width:96px;height:96px;padding:7px}
   .hero-immowelt-badge img{width:82px!important;height:82px!important}
@@ -67,6 +96,20 @@ h1,h2,h3,h4,h5,h6,p,span,strong,small,a,button,label,li,blockquote,.eyebrow,.her
 }
 
 @media(max-width:600px){
+  .brand{
+    min-width:124px!important;
+    width:124px!important;
+    flex-basis:124px!important;
+    height:auto!important;
+    overflow:visible!important;
+  }
+  .brand img{
+    width:124px!important;
+    height:auto!important;
+    max-height:64px!important;
+    object-fit:contain!important;
+    object-position:center!important;
+  }
   .hero h1{font-size:clamp(30px,8vw,34px)!important;line-height:1.05!important;letter-spacing:-.03em!important}
   h2{font-size:clamp(29px,7.7vw,34px)!important;line-height:1.06!important}
   h3{line-height:1.18!important}
@@ -87,6 +130,15 @@ h1,h2,h3,h4,h5,h6,p,span,strong,small,a,button,label,li,blockquote,.eyebrow,.her
 }
 
 @media(max-width:380px){
+  .brand{
+    min-width:112px!important;
+    width:112px!important;
+    flex-basis:112px!important;
+  }
+  .brand img{
+    width:112px!important;
+    max-height:58px!important;
+  }
   .hero h1{font-size:28px!important}
   h2{font-size:28px!important}
   .hero-immowelt-badge{width:80px;height:80px;top:8px;left:8px}
