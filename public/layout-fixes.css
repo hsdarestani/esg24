@@ -1,0 +1,95 @@
+/* Global typography guard: never split German words with automatic hyphenation. */
+html,body{
+  -webkit-hyphens:none!important;
+  hyphens:none!important;
+}
+
+h1,h2,h3,h4,h5,h6,p,span,strong,small,a,button,label,li,blockquote,.eyebrow,.hero-leadline,.hero-text,.property-detail-card,.business-points,.dashboard-list,.topic-grid,.direct-contact,.footer-col{
+  -webkit-hyphens:none!important;
+  hyphens:none!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+}
+
+/* Make the large hero heading fit without forcing mid-word breaks. */
+.hero h1{
+  font-size:clamp(46px,3.8vw,58px)!important;
+  line-height:1.01!important;
+  letter-spacing:-.04em!important;
+  max-width:100%;
+}
+
+/* Official immowelt partner mark as a compact badge on the hero portrait. */
+.hero-immowelt-badge{
+  position:absolute;
+  z-index:6;
+  top:18px;
+  left:8px;
+  width:104px;
+  height:104px;
+  padding:8px;
+  display:grid;
+  place-items:center;
+  border-radius:20px;
+  background:rgba(255,255,255,.97);
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:0 18px 45px rgba(0,25,19,.24);
+  backdrop-filter:blur(8px);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.hero-immowelt-badge:hover{
+  transform:translateY(-3px);
+  box-shadow:0 23px 55px rgba(0,25,19,.3);
+}
+.hero-immowelt-badge img{
+  display:block;
+  width:88px!important;
+  height:88px!important;
+  max-width:none!important;
+  object-fit:contain;
+}
+
+/* Do not let long labels force a split; reduce local type slightly where needed. */
+.energy-overview strong,.business-points span,.topic-grid span,.property-secondary-grid article>span,.footer-col a,.footer-col span{
+  font-size:min(1em,16px);
+}
+
+@media(max-width:1100px){
+  .hero h1{font-size:clamp(42px,6vw,56px)!important}
+  .hero-immowelt-badge{left:calc(50% - 220px);top:18px}
+}
+
+@media(max-width:850px){
+  .hero h1{font-size:clamp(36px,7.8vw,48px)!important}
+  .hero-immowelt-badge{left:calc(50% - 205px);width:96px;height:96px;padding:7px}
+  .hero-immowelt-badge img{width:82px!important;height:82px!important}
+  h2{font-size:clamp(34px,8vw,43px)!important}
+}
+
+@media(max-width:600px){
+  .hero h1{font-size:clamp(30px,8vw,34px)!important;line-height:1.05!important;letter-spacing:-.03em!important}
+  h2{font-size:clamp(29px,7.7vw,34px)!important;line-height:1.06!important}
+  h3{line-height:1.18!important}
+  .hero-copy,.hero-copy *{max-width:100%}
+  .hero-immowelt-badge{
+    top:10px;
+    left:10px;
+    width:86px;
+    height:86px;
+    padding:6px;
+    border-radius:17px;
+  }
+  .hero-immowelt-badge img{width:74px!important;height:74px!important}
+  .property-detail-card h3{font-size:1.28rem!important}
+  .property-secondary-grid h3{font-size:1.15rem!important}
+  .modern-grid h3{font-size:1.16rem!important}
+  .topic-grid span{font-size:9px!important}
+}
+
+@media(max-width:380px){
+  .hero h1{font-size:28px!important}
+  h2{font-size:28px!important}
+  .hero-immowelt-badge{width:80px;height:80px;top:8px;left:8px}
+  .hero-immowelt-badge img{width:68px!important;height:68px!important}
+  .btn-large{font-size:10.5px!important}
+}
