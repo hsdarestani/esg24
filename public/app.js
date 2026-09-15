@@ -99,6 +99,22 @@
     button.addEventListener('click', () => selectIntent(button.dataset.intent || 'Allgemeine Beratung'));
   });
 
+  const mountHeroImmoweltBadge = () => {
+    const heroPerson = $('.hero-person');
+    if (!heroPerson || $('.hero-immowelt-badge', heroPerson)) return;
+
+    const badge = document.createElement('a');
+    badge.className = 'hero-immowelt-badge';
+    badge.href = 'https://immowelt.de/profil/16637856';
+    badge.target = '_blank';
+    badge.rel = 'noopener';
+    badge.title = 'Partnerschaft mit AVIV Germany GmbH';
+    badge.setAttribute('aria-label', 'Immowelt-Partner ESG24 – Profil bei immowelt öffnen');
+    badge.innerHTML = '<img src="https://immowelt.de/app_themes/global_rwd/image/logo/partner-awards/partneraward_partner.svg" alt="Immowelt-Partner ESG24" width="175" height="175">';
+    heroPerson.appendChild(badge);
+  };
+  mountHeroImmoweltBadge();
+
   const formData = () => Object.fromEntries(new FormData(form).entries());
   const message = () => {
     const data = formData();
