@@ -92,6 +92,29 @@
     button.addEventListener('click', () => selectIntent(button.dataset.intent || 'Allgemeine Beratung'));
   });
 
+  const mountImmoweltPartner = () => {
+    const propertySection = $('#immobilien');
+    if (!propertySection || $('.immowelt-partner-section')) return;
+
+    const section = document.createElement('section');
+    section.className = 'immowelt-partner-section section-light';
+    section.setAttribute('aria-label', 'Immowelt Partnerschaft');
+    section.innerHTML = `
+      <div class="container immowelt-partner-inner">
+        <div class="immowelt-partner-copy">
+          <div class="eyebrow dark"><span></span> Immowelt Partner</div>
+          <h2>ESG24 bei <em>immowelt.</em></h2>
+          <p>ESG24 ist als Partner bei immowelt vertreten. Über das offizielle Partner-Logo gelangen Sie direkt zum ESG24-Profil bei immowelt.</p>
+        </div>
+        <div class="immowelt-partner-badge">
+          <a href="https://immowelt.de/profil/16637856" title="Partnerschaft mit AVIV Germany GmbH" target="_blank"><img src="https://immowelt.de/app_themes/global_rwd/image/logo/partner-awards/partneraward_partner.svg" alt="Immowelt-Partner ESG24" width="175" height="175"/></a>
+        </div>
+      </div>`;
+
+    propertySection.insertAdjacentElement('afterend', section);
+  };
+  mountImmoweltPartner();
+
   const formData = () => Object.fromEntries(new FormData(form).entries());
   const message = () => {
     const data = formData();
