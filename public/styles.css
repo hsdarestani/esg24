@@ -72,44 +72,129 @@ html{scroll-padding-top:120px}
 
 /* Contact topic grouping */
 .topic-grid-grouped{align-items:stretch}
-.topic-group-title{grid-column:1/-1;margin:8px 0 2px;padding-top:11px;border-top:1px solid rgba(255,255,255,.12);font-size:.76rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:#9edbc7}
+.topic-group-title{grid-column:1/-1;margin:8px 0 2px;padding-top:11px;border-top:1px solid rgba(7,84,72,.12);font-size:.76rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:#337064}
 .topic-grid-grouped .topic-group-title:first-child{border-top:0;padding-top:0;margin-top:0}
 .topic-grid-grouped label span{height:100%;display:flex;align-items:center}
 
+/* Responsive hardening: keep all text and controls inside their layout cells */
+html,body{max-width:100%;overflow-x:clip}
+main,section,header,footer,.container{min-width:0;max-width:100%}
+.hero-grid>*,.intro-grid>*,.split-heading>*,.business-grid>*,.property-grid>*,.method-grid>*,.about-grid>*,.contact-grid>*,.testimonial-grid>*,.footer-grid>*,.property-main-grid>*,.property-secondary-grid>*,.bridge-grid>*,.energy-overview>*{min-width:0}
+.hero-copy,.business-copy,.property-copy,.method-copy,.about-copy,.contact-copy,.immowelt-partner-copy,.contact-form,.business-dashboard{min-width:0;max-width:100%}
+.hero h1{font-size:clamp(48px,4vw,64px);max-width:100%;overflow-wrap:break-word;word-break:normal;hyphens:auto}
+h2,h3,.property-detail-card>strong,.dashboard-head span,.dashboard-list strong,.dashboard-list small,.direct-contact strong,.footer-col a,.footer-col span{max-width:100%;overflow-wrap:break-word;word-break:normal;hyphens:auto}
+.btn,.service-cta,.text-link-button,.email-submit{max-width:100%;min-width:0;white-space:normal;text-align:center;line-height:1.3;overflow-wrap:break-word}
+.business-points span{min-width:0;align-items:flex-start}.business-points i{flex:0 0 32px}
+.dashboard-list>div{grid-template-columns:auto minmax(0,1fr) auto}.dashboard-list p{min-width:0}
+.dashboard-summary>div,.topic-grid label,.field-grid label,.direct-contact>*{min-width:0}
+.topic-grid span{overflow-wrap:break-word;word-break:normal;hyphens:auto}
+.about-experience{max-width:calc(100% - 8px)}
+
+@media(min-width:1101px){.mobile-menu{display:none!important}}
+
 @media(max-width:1100px){
+  .header-inner{position:relative;justify-content:space-between}
+  .header-actions{margin-left:auto;flex:0 0 auto}
+  .menu-toggle{margin-left:0;flex:0 0 43px}
+  .mobile-menu{position:absolute;top:100%;left:0;right:0;width:100%;max-height:calc(100vh - 92px);overflow-y:auto;padding:10px max(20px,calc((100vw - 720px)/2)) 22px;box-shadow:0 22px 46px rgba(7,55,47,.14)}
+  .mobile-menu[hidden]{display:none!important}
   .energy-overview{grid-template-columns:repeat(2,minmax(0,1fr))}
   .property-main-grid{grid-template-columns:1fr 1fr}
   .property-main-grid .property-detail-card:last-child{grid-column:1/-1}
   .bridge-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .about-experience{right:8px}
 }
 
 @media(max-width:850px){
-  html{scroll-padding-top:100px}
-  .header-inner{height:92px}
-  .brand{min-width:155px;height:82px}
-  .brand img{width:155px;height:84px}
-  .hero{padding-top:148px}
+  html{scroll-padding-top:92px}
+  .header-inner{height:84px}
+  .brand{min-width:145px;height:78px}
+  .brand img{width:145px;height:80px}
+  .hero{padding-top:132px}
   .immowelt-partner-inner{gap:28px}
   .property-main-grid{grid-template-columns:1fr}
   .property-main-grid .property-detail-card:last-child{grid-column:auto}
   .property-secondary-grid{grid-template-columns:1fr}
+  .split-heading,.intro-grid{gap:22px}
+  .section-heading p{max-width:100%}
 }
 
 @media(max-width:600px){
-  html{scroll-padding-top:88px}
-  .header-inner{height:82px}
-  .brand{min-width:140px;height:74px}
-  .brand img{width:140px;height:76px}
-  .hero{padding-top:128px}
-  .footer-brand img{width:210px}
-  .hero-cta-expanded{flex-direction:column;align-items:stretch}
-  .hero-cta-expanded .btn{width:100%}
+  :root{--container:calc(100% - 28px)}
+  html{scroll-padding-top:82px}
+  body{font-size:15px}
+  .header-inner{height:76px;gap:12px}
+  .brand{min-width:124px;width:124px;height:70px;flex:0 0 124px}
+  .brand img{width:124px;height:70px}
+  .header-actions{margin-left:auto}
+  .menu-toggle{width:44px;height:44px;flex-basis:44px}
+  .menu-toggle span{left:50%;width:18px;transform:translateX(-50%)}
+  .menu-toggle span:first-child{top:16px}.menu-toggle span:last-child{top:24px}
+  .menu-toggle[aria-expanded=true] span:first-child{top:21px;transform:translateX(-50%) rotate(45deg)}
+  .menu-toggle[aria-expanded=true] span:last-child{top:21px;transform:translateX(-50%) rotate(-45deg)}
+  .mobile-menu{max-height:calc(100vh - 76px);padding:8px 14px 18px}
+  .mobile-menu a{padding:14px 4px;font-size:14px}
+
+  .hero{padding-top:112px}
+  .hero-grid{gap:34px}
+  .hero h1{font-size:clamp(34px,9.4vw,38px);line-height:1.02;letter-spacing:-.035em;overflow-wrap:normal;hyphens:auto}
+  .hero-leadline{font-size:1rem;line-height:1.45;overflow-wrap:break-word}
+  .hero-text{font-size:13px;line-height:1.72;margin:22px 0 25px}
+  .hero-cta-expanded{flex-direction:column;align-items:stretch;width:100%}
+  .hero-cta-expanded .btn,.hero-cta-expanded .btn-whatsapp{width:100%;min-height:48px;padding:14px 16px;font-size:12px}
+  .hero-proof{max-width:100%}
+  .hero-person{min-height:400px;width:100%}
+  .person-photo{width:100%;max-width:360px;height:380px}
+  .person-card{left:8px;right:8px;width:auto;max-width:calc(100% - 16px)}
+
+  h2{font-size:clamp(33px,9.4vw,41px);line-height:1.02;overflow-wrap:break-word;hyphens:auto}
+  h3{overflow-wrap:break-word;hyphens:auto}
+  .eyebrow{max-width:100%;flex-wrap:wrap;line-height:1.45}
+  .section-heading{margin-bottom:32px}
+  .section-heading.centered{padding-inline:0}
+
+  .footer-brand img{width:min(210px,100%)}
   .energy-overview{grid-template-columns:1fr}
+  .energy-overview article{min-height:auto;padding:18px}
+  .energy-note{padding:16px 18px}
   .property-expanded{padding-top:72px;padding-bottom:72px}
-  .property-detail-card{padding:24px}
+  .property-detail-card{padding:22px;border-radius:22px}
+  .property-detail-card h3{font-size:1.35rem}
+  .property-detail-card .btn{width:100%;align-self:stretch}
+  .property-secondary-grid article{padding:22px}
   .bridge-grid{grid-template-columns:1fr}
   .energy-property-bridge{padding:72px 0}
   .immowelt-partner-section{padding:28px 0 34px}
-  .immowelt-partner-inner{flex-direction:column;align-items:flex-start;gap:22px}
-  .immowelt-partner-badge{align-self:center;min-width:215px;min-height:215px}
+  .immowelt-partner-inner{flex-direction:column;align-items:stretch;gap:22px}
+  .immowelt-partner-badge{align-self:center;min-width:0;width:min(215px,100%);min-height:215px;padding:20px}
+  .immowelt-partner-badge img{width:min(175px,100%)!important;height:auto!important;aspect-ratio:1/1}
+  .business-dashboard{padding:15px}
+  .dashboard-head{gap:10px;align-items:flex-start}.dashboard-head b{flex:0 0 auto}
+  .dashboard-list>div{grid-template-columns:auto minmax(0,1fr);gap:10px}.dashboard-list>div>b{grid-column:2;justify-self:start}
+  .dashboard-summary{grid-template-columns:1fr}
+  .about-portrait{width:100%;max-width:500px}
+  .about-portrait>img{width:100%;height:auto;min-height:440px;max-height:510px}
+  .about-experience{right:10px;top:16px;width:88px;height:88px;border-width:5px}
+  .about-experience strong{font-size:26px}.about-experience span{font-size:7px}
+  .contact-form{width:100%;padding:18px 15px}
+  .form-head{flex-wrap:wrap;gap:4px 10px}.form-head strong{width:100%}
+  .field-grid input,.field-grid select,.field-grid textarea{min-width:0}
+  .topic-grid{grid-template-columns:1fr}
+  .topic-grid span{min-height:46px;padding:10px 12px;font-size:10px}
+  .topic-group-title{font-size:.7rem}
+  .direct-contact strong{font-size:10px}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .footer-brand{grid-column:auto;max-width:100%}
+  .footer-bottom{max-width:100%}
+  .mobile-cta{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .mobile-cta a{min-width:0;padding-inline:6px;white-space:normal;text-align:center;line-height:1.15}
+}
+
+@media(max-width:380px){
+  :root{--container:calc(100% - 22px)}
+  .brand{min-width:112px;width:112px;flex-basis:112px}.brand img{width:112px}
+  .hero h1{font-size:33px}
+  .btn-large{font-size:11px}
+  .contact-form{padding:16px 12px}
+  .mobile-cta{padding-inline:6px;gap:5px}.mobile-cta a{font-size:8px}
 }
