@@ -1,6 +1,14 @@
 (() => {
   'use strict';
 
+  const layoutFixesHref = './layout-fixes.css';
+  if (!document.querySelector(`link[href="${layoutFixesHref}"]`)) {
+    const layoutFixes = document.createElement('link');
+    layoutFixes.rel = 'stylesheet';
+    layoutFixes.href = layoutFixesHref;
+    document.head.appendChild(layoutFixes);
+  }
+
   const $ = (selector, scope = document) => scope?.querySelector(selector);
   const $$ = (selector, scope = document) => [...(scope?.querySelectorAll(selector) || [])];
   const header = $('.site-header');
