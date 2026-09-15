@@ -71,10 +71,12 @@
     if (values.includes(intent)) return intent;
     if (/Strom/i.test(intent)) return 'Strom';
     if (/Gas/i.test(intent)) return 'Gas';
-    if (/Gewerbe.*Lieferstellen|Energieoptimierung/i.test(intent)) return /Gewerbe/i.test(intent) ? 'Gewerbe / mehrere Lieferstellen' : 'Strom';
+    if (/Gewerbe.*Lieferstellen/i.test(intent)) return 'Gewerbe / mehrere Lieferstellen';
+    if (/Energieoptimierung/i.test(intent)) return 'Allgemeine Beratung';
     if (/Kapitalanlage/i.test(intent)) return 'Kapitalanlage';
     if (/Gewerbeimmobil/i.test(intent)) return 'Gewerbeimmobilie';
-    if (/Off-Market|Immobilienverkauf|Immobilienberatung/i.test(intent)) return 'Immobilienverkauf';
+    if (/Off-Market|Immobilienverkauf/i.test(intent)) return 'Immobilienverkauf';
+    if (/Immobilienberatung/i.test(intent)) return 'Allgemeine Beratung';
     if (/Immobiliensuche/i.test(intent)) return 'Immobiliensuche';
     if (/Energieausweis/i.test(intent)) return 'Energieausweis';
     if (/Photovoltaik|Solaranlage/i.test(intent)) return 'Photovoltaik / Solaranlage';
