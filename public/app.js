@@ -26,6 +26,13 @@
     heroPortrait.style.objectPosition = 'center center';
   }
 
+  const aboutPortrait = $('.about-portrait > img');
+  if (aboutPortrait) {
+    aboutPortrait.src = './WhatsApp%20Image%202026-09-16%20at%2018.58.56.jpeg';
+    aboutPortrait.removeAttribute('srcset');
+    aboutPortrait.style.objectPosition = 'center center';
+  }
+
   const setHeader = () => header?.classList.toggle('scrolled', window.scrollY > 18);
   setHeader();
   window.addEventListener('scroll', setHeader, { passive: true });
