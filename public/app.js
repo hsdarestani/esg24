@@ -19,6 +19,13 @@
   const cookieDialog = $('#cookie-dialog');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  const heroPortrait = $('.hero-person .person-photo img');
+  if (heroPortrait) {
+    heroPortrait.src = './WhatsApp%20Image%202026-09-16%20at%2018.58.56.jpeg';
+    heroPortrait.removeAttribute('srcset');
+    heroPortrait.style.objectPosition = 'center center';
+  }
+
   const setHeader = () => header?.classList.toggle('scrolled', window.scrollY > 18);
   setHeader();
   window.addEventListener('scroll', setHeader, { passive: true });
